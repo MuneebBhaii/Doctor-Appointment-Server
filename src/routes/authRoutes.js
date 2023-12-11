@@ -25,24 +25,24 @@ router.post('/register', async (req, res) => {
     }
 })
 
-router.post('/login', async (req, res) => {
-    const user = await Auth.findOne({ email: req.body.email })
-    if (!user) {
-        return res.status(200).json({ message: "Account not found" })
-    }
-    if(user.roll != req.body.roll) {
-        return res.status(200).json({ message: "Not register as this roll" })
-    }
-    const passwordMatch = await bcrypt.compare(
-        req.body.password,
-        user.password
-    )
-    if(!passwordMatch) {
-        return res.status(200).json({ message: "password mismatch" })
-    }
+router.get('/login', async (req, res) => {
+    // const user = await Auth.findOne({ email: req.body.email })
+    // if (!user) {
+    //     return res.status(200).json({ message: "Account not found" })
+    // }
+    // if(user.roll != req.body.roll) {
+    //     return res.status(200).json({ message: "Not register as this roll" })
+    // }
+    // const passwordMatch = await bcrypt.compare(
+    //     req.body.password,
+    //     user.password
+    // )
+    // if(!passwordMatch) {
+    //     return res.status(200).json({ message: "password mismatch" })
+    // }
     
-    const token = jwt.sign({user} , process.env.SECURE_KEY)
-    res.status(200).json({ message:"successfully login ", token })
+    // const token = jwt.sign({user} , process.env.SECURE_KEY)
+  return  res.status(200).json({ message:"successfully login ", token })
 })
 
 module.exports = router
